@@ -1,161 +1,96 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-<title>Adeudo Tenencia</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Validación de permiso</title>
 <style>
-    body {
-        background-color: white; 
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 0;
-        display: flex;
-        justify-content: center;
-        height: 100%;
-    }
-    
-    .container {
-        background-color: #fff;
-        border-radius: 10px;
-        padding: 20px;
-        box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
-        max-width: 700px;
-        width: 100%;
-    }
-    
-    .container img {
-        max-width: 100%;
-        height: auto;
-        display: block;
-        margin: 0 auto;
-        border-radius: 5px;
-        margin-bottom: 10px;
-    }
-
-    .container img.first-image {
-        width: 230px;
-        max-height: 230px;
-        object-fit: cover;
-        object-position: center;
-    }
-    
-    .labelest {
-    font-size: 16px;
-    font-weight: bold;
-    color: #333;
-    margin-bottom: 5px;
-    display: block;
-}
-
-    .labelestR{
-        font-size: 16px;
-    font-weight: bold;
-    color: red;
-    margin-bottom: 5px;
-    display: block;
-    }
-    .estiloinputs {
-        background-color: #f8f8f8;
-        padding: 10px;
-        font-size: 16px;
-        color: #333;
-        width:80%;
-        margin-bottom: 15px;
-    }
-
-
-    .miimglog {
-    float: left; /* Para que la imagen se alinee a la izquierda */
-    margin-right: 10px; /* Ajusta el margen derecho según sea necesario */
-    margin-bottom: 10px; /* Ajusta el margen inferior según sea necesario */
-}
-
-.clearfix::after {
-    content: "";
-    display: table;
-    clear: both;
-}
-
-
-    .contenedorreloj {
-        text-align: center;
-    }
-    .imagen-border {
-        border: 2px solid black; /* Borde negro de 2px */
-
-        border-radius: 20px; /* Borde redondeado para la imagen */
-        margin-bottom: 20px; /* Espacio entre la imagen y el contenido */
-    }
-
-    .contenido-border {
-        border: 2px solid #ccc; /* Borde para el contenido */
-        border-radius: 10px; /* Borde redondeado para el contenido */
-        padding: 10px; /* Espaciado interno para el contenido */
-        width: 300px; /* Ancho del contenedor del contenido */
-        margin: auto; /* Centrar el contenido horizontalmente */
-    }
-
-    .labelest {
-        display: block;
-        font-weight: bold;
-        margin-top: 10px; /* Espacio entre cada etiqueta y su contenido */
-    }
-
-    .estiloinputs {
-        margin-bottom: 10px; /* Espacio entre cada contenido */
-    }
-    .responsive-img {
-        max-width: 100%;
-        height: auto;
-    }
-    @media only screen and (min-width: 600px) {
-        .responsive-img {
-            width:100%; /* Tamaño en dispositivos de pantalla grande */
-            max-width: none; /* Restablecer el máximo ancho */
-            height: 100px; /* Tamaño de altura en dispositivos de pantalla grande */
-        }
-    }
+  * { box-sizing: border-box; }
+  body { margin:0; min-height:100vh; display:flex; align-items:center; justify-content:center;
+         background:#f4f1ea; font-family:-apple-system,"Segoe UI",Roboto,Arial,sans-serif; padding:22px; }
+  .card { background:#fff; border-radius:16px; max-width:620px; width:100%; padding:26px;
+          box-shadow:0 10px 34px rgba(70,45,20,.13); }
+  .logo { display:block; margin:0 auto 12px; width:210px; max-width:75%; }
+  h1 { font-size:14.5px; text-align:center; letter-spacing:.5px; color:#7a2e1e; margin:0 0 3px;
+       text-transform:uppercase; }
+  .sub { text-align:center; color:#7d7268; font-size:12px; margin-bottom:16px; }
+  .ok { display:flex; gap:8px; align-items:center; justify-content:center; background:#e9f6ec;
+        color:#1b5e20; font-weight:700; padding:9px; border-radius:10px; margin-bottom:16px; font-size:13.5px; }
+  .err { background:#fdecea; color:#b3261e; padding:10px; border-radius:10px; font-size:13.5px; text-align:center; }
+  .fila { display:flex; gap:12px; padding:8px 0; border-bottom:1px solid #f0ece4; font-size:13.5px; }
+  .fila:last-of-type { border-bottom:0; }
+  .et { width:45%; color:#8a6a55; }
+  .va { flex:1; color:#241f1b; font-weight:600; word-break:break-word; }
+  .pie { margin-top:16px; font-size:10.5px; color:#a59a8e; text-align:center; line-height:1.5;
+         border-top:1px solid #f0ece4; padding-top:10px; }
+  .cargando { text-align:center; color:#8a6a55; padding:20px 0; }
 </style>
 </head>
 <body>
-<div class='contenedor'><div class='imagen-border'><img src='logosmex/Oaxaca.png' class='responsive-img'><br><div id="contenedorreloj" class="contenedorreloj">HI</div></div > <div class='contenido-border'><span class='labelestR'>DATOS DEL PERMISO PROVISIONAL PARA CIRCULAR SIN PLACAS Y TARJETAS DE CIRCULACIÓN DE SERVICIOS PARTICULAR VÁLIDO POR 30 DÍAS</span><span class='labelest'>Propietario:</span><div >GUSTAVO ALONSO VELAZQUEZ PEREZ</div><span class='labelest'>Rfc:</span><div>XAXX010101000</div><span class='labelest'>Fecha de Expedicion:</span><div >06/11/2026</div><span class='labelest'>Vigencia del permiso:</span><div >05/12/2026</div><span class='labelest'>Marca:</span><div >VOLKSWAGEN</div><span class='labelest'>Modelo:</span><div >POLO MOTOR 1.6 LTS</div><span class='labelest'>Año/Modelo:</span><div >2015</div><span class='labelest'>Color:</span><div >BLANCO CANDY</div><span class='labelest'>N° de serie:</span><div >MEX3G2606FT043669</div><span class='labelest'>N° de motor:</span><div >CLS 362825</div></div>
-<script>
-    const fecha = new Date();
-    const dia = fecha.getDate();        // Día del mes (1 - 31)
-    const mes = fecha.getMonth() + 1;   // Mes (0 - 11) → +1 para tener 1 - 12
-    const anio = fecha.getFullYear();   // Año completo (ej. 2026)
-    var meses = ['','ENERO','FEBRERO','MARZO','ABRIL','MAYO','JUNIO','JULIO','AGOSTO','SEPTIEMBRE','OCTUBRE','NOVIEMBRE','DICIEMBRE'];
-    //JAJA AHORA CARGA ESTO HDP
-    document.getElementById("contenedorreloj").innerHTML = dia + " DE " + meses[mes] + " DEL " + anio
-    console.log('Support die')
-function compartir() {
-    // Obtener los parámetros de código de envío y parte
-    var codigoenvio = '';
-    var parte = '';
-
-    // Construir la URL actual con los parámetros
-    var urlActual = "verget.php"; // URL sin parámetros
-    var parametros = '?codigoenvio=' + codigoenvio + '&parte=' + parte;
-    var urlCompartir = urlActual + parametros;
-
-    // Verificar si el navegador admite la API de compartir
-    if (navigator.share) {
-        navigator.share({
-            title: 'Compartir Datos',
-            text: 'Compartir datos recibidos',
-            url: urlCompartir
-        })
-        .then(() => console.log('Contenido compartido'))
-        .catch((error) => console.error('Error al compartir:', error));
-    } else {
-        // En caso de que el navegador no admita la API de compartir, simplemente abre la URL en una nueva ventana
-        window.open(urlCompartir, '_blank');
-    }
-}
-</script>
+<div class="card">
+  <img class="logo" src="logosmex/Oaxaca.png" alt="Gobierno del Estado de Oaxaca"
+       onerror="this.style.display='none'">
+  <h1>Permiso provisional para circular</h1>
+  <div class="sub">sin placas y tarjetas de circulación · servicios particulares</div>
+  <div id="contenido"><div class="cargando">Consultando el permiso…</div></div>
+  <div class="pie" id="pie"></div>
 </div>
+<script>
+(function () {
+  var CAMPOS = [
+    ["propietario", "Propietario"],
+    ["rfc", "RFC"],
+    ["fecha_expedicion", "Fecha de expedición"],
+    ["vigencia", "Vigencia del permiso"],
+    ["marca", "Marca"],
+    ["modelo", "Modelo"],
+    ["anio", "Año/Modelo"],
+    ["color", "Color"],
+    ["serie", "N° de serie"],
+    ["motor", "N° de motor"],
+    ["placas", "Placas"]
+  ];
+  var cont = document.getElementById("contenido");
+  var pie = document.getElementById("pie");
+
+  function err(msg) {
+    cont.innerHTML = '<div class="err">' + msg + "</div>";
+  }
+  function fecha(v) {
+    if (!v) return "";
+    var m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(v);
+    return m ? (m[3] + "/" + m[2] + "/" + m[1]) : v;
+  }
+  function esc(s) {
+    return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) {
+      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
+    });
+  }
+
+  var id = new URLSearchParams(location.search).get("id");
+  if (!id) { err("Falta el folio del permiso en el enlace."); return; }
+  if (!/^[A-Za-z0-9._-]+$/.test(id)) { err("Folio inválido."); return; }
+
+  fetch(id + "/datos.json", { cache: "no-store" })
+    .then(function (r) { if (!r.ok) throw new Error("No encontrado"); return r.json(); })
+    .then(function (d) {
+      var html = '<div class="ok">✓ Permiso válido · datos verificados en línea</div>';
+      CAMPOS.forEach(function (c) {
+        var v = d[c[0]];
+        if (c[0] === "fecha_expedicion" || c[0] === "vigencia") v = fecha(v);
+        if (v == null || String(v).trim() === "") return;
+        html += '<div class="fila"><span class="et">' + esc(c[1]) + '</span>' +
+                '<span class="va">' + esc(v) + "</span></div>";
+      });
+      cont.innerHTML = html;
+      pie.innerHTML = "Folio " + esc(d.folio || id) +
+        "<br>Consulta generada automáticamente. Los datos mostrados son los registrados al emitir el permiso.";
+    })
+    .catch(function () {
+      err("No se encontró información para el folio <b>" + esc(id) + "</b>.<br>" +
+          "Verifica el enlace o el código QR.");
+    });
+})();
+</script>
 </body>
 </html>
