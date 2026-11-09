@@ -68,10 +68,14 @@
   }
 
   var id = new URLSearchParams(location.search).get("id");
-  if (!id) { err("Falta el folio del permiso en el enlace."); return; }
-  if (!/^[A-Za-z0-9._-]+$/.test(id)) { err("Folio inválido."); return; }
+  if (id && !/^[A-Za-z0-9._-]+$/.test(id)) { err("Folio inválido."); return; }
 
-  fetch(id + "/datos.json", { cache: "no-store" })
+  // Compatibilidad: los QR antiguos apuntan a la raíz sin ?id=.
+  // En ese caso se muestra el permiso por defecto guardado en datos.json.
+  var url = id ? (id + "/datos.json") : "datos.json";
+  var etiqueta = id || "permiso";
+
+  fetch(url, { cache: "no-store" })
     .then(function (r) { if (!r.ok) throw new Error("No encontrado"); return r.json(); })
     .then(function (d) {
       var html = '<div class="ok">✓ Permiso válido · datos verificados en línea</div>';
@@ -83,11 +87,11 @@
                 '<span class="va">' + esc(v) + "</span></div>";
       });
       cont.innerHTML = html;
-      pie.innerHTML = "Folio " + esc(d.folio || id) +
+      pie.innerHTML = "Folio " + esc(d.folio || etiqueta) +
         "<br>Consulta generada automáticamente. Los datos mostrados son los registrados al emitir el permiso.";
     })
     .catch(function () {
-      err("No se encontró información para el folio <b>" + esc(id) + "</b>.<br>" +
+      err("No se encontró información para el folio <b>" + esc(etiqueta) + "</b>.<br>" +
           "Verifica el enlace o el código QR.");
     });
 })();
